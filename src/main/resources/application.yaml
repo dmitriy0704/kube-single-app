@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: kube-single-app
+server:
+  port: 8092

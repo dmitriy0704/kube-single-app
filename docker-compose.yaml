@@ -1,0 +1,18 @@
+services:
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8092:8092"
+    image: kube-single-image
+    container_name: kube-single-container
+    restart: unless-stopped
+    environment:
+      - SERVER_PORT=8092
+      - SPRING_APPLICATION_NAME=kube-single-app
+      - JAVA_OPTS=-Xms256m -Xmx512m
+
+networks:
+  default:
+    name: kube-demo-net
