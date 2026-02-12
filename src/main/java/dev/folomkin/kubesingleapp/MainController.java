@@ -11,6 +11,6 @@ public class MainController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "hello from Kubernetes!";
+        return "hello from Kubernetes! V4.0";
     }
 }

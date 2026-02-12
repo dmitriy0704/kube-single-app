@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dmitriyf7498-kubesingleapp-deployment
+  labels:
+    app: dmitriyf7498-kubesingleapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dmitriyf7498-kubesingleapp
+  template:
+    metadata:
+      labels:
+        app: dmitriyf7498-kubesingleapp
+    spec:
+      containers:
+        - name: dmitriyf7498-kubesingleapp
+          image: dmitriyf7498/kube-single-app:latest
+          imagePullPolicy: Always # ВСЕГДА скачивать образ (важно для тега :dev)
+          ports:
+            - containerPort: 8092 # Порт, который слушает приложение внутри
