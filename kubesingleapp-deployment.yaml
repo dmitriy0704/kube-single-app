@@ -1,22 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dmitriyf7498-kubesingleapp-deployment
+  name: kubesingleapp-deployment
   labels:
-    app: dmitriyf7498-kubesingleapp
+    app: kubesingleapp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: dmitriyf7498-kubesingleapp
+      app: kubesingleapp
   template:
     metadata:
       labels:
-        app: dmitriyf7498-kubesingleapp
+        app: kubesingleapp
     spec:
       containers:
-        - name: dmitriyf7498-kubesingleapp
-          image: dmitriyf7498/kube-single-app:latest
+        - name: kubesingleapp
+          image: dmitriyf7498/kube-single-app-vol:latest
+          volumeMounts:
+            - mountPath: /app/storage
+              name: kubesingleapp-volume
           imagePullPolicy: Always # ВСЕГДА скачивать образ (важно для тега :dev)
           ports:
             - containerPort: 8092 # Порт, который слушает приложение внутри
+      volumes:
+        - name: kubesingleapp-volume
+          persistentVolumeClaim:
+            claimName: local-persistent-volume-claim

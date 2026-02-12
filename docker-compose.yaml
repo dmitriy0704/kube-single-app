@@ -1,8 +1,10 @@
 services:
-  user-service:
+  kube-single-app:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - kube-single-app:/app/storage
     ports:
       - "8092:8092"
     image: kube-single-image
@@ -12,6 +14,9 @@ services:
       - SERVER_PORT=8092
       - SPRING_APPLICATION_NAME=kube-single-app
       - JAVA_OPTS=-Xms256m -Xmx512m
+
+volumes:
+  kube-single-app:
 
 networks:
   default:
